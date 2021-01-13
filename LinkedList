@@ -1,0 +1,108 @@
+// 1 -> 2 -> 3 -> nil
+class LinkedList{
+    var head : Node?
+    
+    func insertDummyData() {
+        let third = Node(value: 3, next: nil)
+        let second = Node(value: 2, next: third)
+        head = Node(value: 1, next: second)
+    }
+    
+    func insertDataToList(_ value : Int) {
+        if head == nil{
+            head = Node(value: value, next: nil)
+            return
+        }
+        
+        var current = head
+        while current?.next != nil {
+            current = current?.next
+        }
+        
+        current?.next = Node(value: value, next: nil)
+    }
+    
+    func displayList() {
+        print("Here is your list --")
+        var current = head
+        while current != nil {
+            print(current?.value ?? "")
+            current = current?.next
+        }
+    }
+    
+    func deleteValue(value : Int) {
+        if head?.value == value{
+            head = head?.next
+            return
+        }
+        var current = head
+        var prev : Node?
+        while current?.value != value {
+            prev = current
+            current = current?.next
+        }
+        prev?.next = current?.next
+    }
+    
+    func insertSpecial(value : Int, place : Int) {
+        if head == nil{
+            head = Node(value: value, next: nil)
+            return
+        }
+        var newNode : Node?
+        newNode = Node(value: value, next: nil)
+        var current = head
+        var placeTemp = place
+        var prev : Node?
+        while placeTemp != 1 {
+            placeTemp = placeTemp - 1
+            prev = current
+            current = current?.next
+        }
+        newNode?.next = current
+        prev?.next = newNode
+    }
+    
+    func reverseList() -> Node? {
+        var current = head
+        var prev : Node?
+        var next : Node?
+        
+        while current != nil {
+            next = current?.next
+            current?.next = prev
+            prev = current
+            current = next
+        }
+        return prev
+    }
+    
+    func printReverse(head : Node?) {
+        var current = head
+        while current != nil {
+            print(current?.value ?? -1)
+            current = current?.next
+        }
+    }
+    
+}
+
+class Node{
+    var value : Int
+    var next : Node?
+    
+    init(value : Int, next : Node?) {
+        self.value = value
+        self.next = next
+    }
+}
+
+let objLinkedList = LinkedList()
+//objLinkedList.insertDummyData()
+objLinkedList.insertDataToList(1)
+objLinkedList.insertDataToList(2)
+objLinkedList.insertDataToList(3)
+//let rev = objLinkedList.reverseList()
+//objLinkedList.printReverse(head: rev)
+objLinkedList.displayList()
