@@ -86,6 +86,25 @@ class LinkedList{
         }
     }
     
+    //Move last element to front of a given Linked List
+    
+    func moveToFirst(){
+        if head == nil{
+            return
+        }
+        var current = head
+        var prev : Node?
+        
+        while current?.next != nil{
+            prev = current
+            current = current?.next
+        }
+        
+        prev?.next = nil
+        current?.next = head
+        head = current
+    }
+    
 }
 
 class Node{
